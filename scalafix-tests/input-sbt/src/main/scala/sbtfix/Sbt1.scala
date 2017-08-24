@@ -129,4 +129,6 @@ object Sbt1 {
     task3 <<= (task1, task2) map { (t1, t2) => println(t1 + t2); t1 + t2 }
     task4 <<= (sett1, sett2) map { (s1, s2) => println(s1 + s2); s1 + s2 }
   }
+
+  val xyz: sbt.inc.Analysis = sbt.inc.Analysis.Empty
 }

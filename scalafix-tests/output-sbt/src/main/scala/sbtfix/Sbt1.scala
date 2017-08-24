@@ -1,6 +1,7 @@
 package sbtfix
 
 import sbt._
+import sbt.TupleSyntax._
 
 object Sbt1 {
   object `<++=` {
@@ -34,17 +35,17 @@ object Sbt1 {
 
   object `<<=` {
     import Keys.{compile, name}
-    lazy val test1 = taskKey[sbt.inc.Analysis]("Test 1.")
+    lazy val test1 = taskKey[xsbti.compile.CompileAnalysis]("Test 1.")
     test1 := (compile in Compile).value
-    lazy val test1b = taskKey[sbt.inc.Analysis]("Test 1b.")
+    lazy val test1b = taskKey[xsbti.compile.CompileAnalysis]("Test 1b.")
     test1b := (compile in Compile).value
-    lazy val test2 = taskKey[sbt.inc.Analysis]("Test 2.")
+    lazy val test2 = taskKey[xsbti.compile.CompileAnalysis]("Test 2.")
     test2 := (Def.task { (compile in Compile).value }).value
     lazy val test3 = settingKey[String]("Test 3.")
     test3 := name.value
     lazy val test4 = settingKey[String]("Test 4.")
     test4 := (Def.setting { name.value }).value
-    lazy val test5 = taskKey[sbt.inc.Analysis]("Test 5.")
+    lazy val test5 = taskKey[xsbti.compile.CompileAnalysis]("Test 5.")
     test5 := (Def.task {
       println("Executing task.")
       (compile in Compile).value
@@ -63,11 +64,11 @@ object Sbt1 {
     run := key.evaluated
     run := (key in ThisProject).evaluated
     run := (key in ThisProject).evaluated
-    run := (Def.inputTask { key.value }).evaluated
-    run := (Def.inputTask { (key).value }).evaluated
+    run := (Def.inputTask { key.evaluated }).evaluated
+    run := (Def.inputTask { (key).evaluated }).evaluated
     run := (Def.inputTask {
       println("Executing task.")
-      key.value
+      key.evaluated
     }).evaluated
 
     val key2 = inputKey[Unit]("Seed 2.")
@@ -75,11 +76,11 @@ object Sbt1 {
     runMain := key2.evaluated
     runMain := (key2 in ThisProject).evaluated
     runMain := (key2 in ThisProject).evaluated
-    runMain := (Def.inputTask { key2.value }).evaluated
-    runMain := (Def.inputTask { (key2).value }).evaluated
+    runMain := (Def.inputTask { key2.evaluated }).evaluated
+    runMain := (Def.inputTask { (key2).evaluated }).evaluated
     runMain := (Def.inputTask {
       println("Executing task.")
-      key2.value
+      key2.evaluated
     }).evaluated
 
     val key3 = inputKey[Unit]("Seed 3.")
@@ -87,11 +88,11 @@ object Sbt1 {
     testOnly := key3.evaluated
     testOnly := (key3 in ThisProject).evaluated
     testOnly := (key3 in ThisProject).evaluated
-    testOnly := (Def.inputTask { key3.value }).evaluated
-    testOnly := (Def.inputTask { (key3).value }).evaluated
+    testOnly := (Def.inputTask { key3.evaluated }).evaluated
+    testOnly := (Def.inputTask { (key3).evaluated }).evaluated
     testOnly := (Def.inputTask {
       println("Executing task.")
-      key3.value
+      key3.evaluated
     }).evaluated
 
     val key4 = inputKey[Unit]("Seed 4.")
@@ -99,11 +100,11 @@ object Sbt1 {
     testQuick := key4.evaluated
     testQuick := (key4 in ThisProject).evaluated
     testQuick := (key4 in ThisProject).evaluated
-    testQuick := (Def.inputTask { key4.value }).evaluated
-    testQuick := (Def.inputTask { (key4).value }).evaluated
+    testQuick := (Def.inputTask { key4.evaluated }).evaluated
+    testQuick := (Def.inputTask { (key4).evaluated }).evaluated
     testQuick := (Def.inputTask {
       println("Executing task.")
-      key4.value
+      key4.evaluated
     }).evaluated
   }
 

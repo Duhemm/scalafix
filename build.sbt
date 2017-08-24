@@ -330,8 +330,7 @@ lazy val testsOutputSbt = project
   .in(file("scalafix-tests/output-sbt"))
   .settings(
     noPublish,
-    is210Only,
-    sbtPlugin := true
+    libraryDependencies += "org.scala-sbt" % "sbt" % sbt1V
   )
 
 lazy val unit = project
